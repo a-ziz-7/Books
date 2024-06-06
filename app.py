@@ -23,6 +23,7 @@ def get_books_by_genre():
     return library
 
 def get_book_details(title):
+    # print(title, '???')
     conn = sqlite3.connect('library.sqlite')
     cursor = conn.cursor()
     cursor.execute('''
@@ -43,9 +44,12 @@ def index():
 
 @app.route('/book/<title>')
 def book_detail(title):
+    # print(type(title))
+    title = ' '.join(title.split("%20"))
     # Debugging: Print the title being accessed
-    print(f"Accessing book detail for: {title}")
+    # print(f"Accessing book detail for: {title}")
     book = get_book_details(title)
+    # print(book)
     return render_template('book_detail.html', book=book)
 
 if __name__ == '__main__':
@@ -53,13 +57,14 @@ if __name__ == '__main__':
     # print(f"Template folder: {app.template_folder}")
     
     # Print the contents of the templates folder
-    template_folder_path = app.template_folder
-    if template_folder_path and os.path.exists(template_folder_path):
-        print("Contents of the templates folder:")
-        for root, dirs, files in os.walk(template_folder_path):
-            for name in files:
-                print(os.path.join(root, name))
-    else:
-        print("Templates folder not found.")
+    # template_folder_path = app.template_folder
+    # if template_folder_path and os.path.exists(template_folder_path):
+    #     # print("Contents of the templates folder:")
+    #     for root, dirs, files in os.walk(template_folder_path):
+    #         for name in files:
+    #             if not name.startswith('.'):
+    #                 print(os.path.join(root, name))
+    # else:
+    #     print("Templates folder not found.")
     
     app.run(debug=True)
