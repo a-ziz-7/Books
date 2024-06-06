@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ book[0] }}</h1>
+        <p><strong>Author:</strong> {{ book[1] }} {{ book[2] }}</p>
+        <p><strong>Genre:</strong> {{ book[3] }}</p>
+        <p><strong>Bold:</strong> {{ 'Yes' if book[4] else 'No' }}</p>
+        <a href="{{ url_for('index') }}">Back to Library</a>
+    </div>
+</body>
+</html>

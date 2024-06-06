@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Library</h1>
+        {% for genre, books in library.items() %}
+            <div class="genre">
+                <h2>{{ genre }}</h2>
+                <ul>
+                    {% for book, bold in books %}
+                        <li class="{{ 'bold' if bold else '' }}">
+                            <a href="{{ url_for('book_detail', title=book) | urlencode }}">{{ book }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
