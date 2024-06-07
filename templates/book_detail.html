@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>{{ book[0] }}</h1>
-        <img src="{{ book[7] }}" alt="Thumbnail" />
+        <img src="{{ book[7] }}" alt="Thumbnail" style="width: 192px; height: 292px;" />
         <p><strong>Author:</strong> {{ book[1] }} {{ book[2] }}</p>
         <p><strong>Genre:</strong> {{ book[3] }}</p>
         <p><strong>Must read:</strong> {{ 'Yes' if book[4] else 'No' }}</p>
