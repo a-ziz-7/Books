@@ -25,10 +25,10 @@ conn = sqlite3.connect('library.sqlite')
 
 # Create a cursor object to execute SQL queries
 cursor = conn.cursor()
-# cursor.execute("DROP TABLE IF EXISTS genre")
-# cursor.execute("DROP TABLE IF EXISTS authors")
-# cursor.execute("DROP TABLE IF EXISTS books")
-# cursor.execute("DROP TABLE IF EXISTS read_link")
+cursor.execute("DROP TABLE IF EXISTS genre")
+cursor.execute("DROP TABLE IF EXISTS authors")
+cursor.execute("DROP TABLE IF EXISTS books")
+cursor.execute("DROP TABLE IF EXISTS read_link")
 
 # Create a table to store the books
 cursor.execute(''' 
@@ -71,14 +71,14 @@ cursor.execute('''
 ''')
 
 # Create a table to store the book links
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS read_link (
-        read_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        book_id INTEGER,
-        pdf_file TEXT,
-        FOREIGN KEY (book_id) REFERENCES books(book_id)
-    )
-''')
+# cursor.execute('''
+#     CREATE TABLE IF NOT EXISTS read_link (
+#         read_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         book_id INTEGER,
+#         pdf_file TEXT,
+#         FOREIGN KEY (book_id) REFERENCES books(book_id)
+#     )
+# ''')
 
 def insert_genre(genre):
     cursor.execute('''
@@ -152,13 +152,13 @@ def insert_read(book, pdf):
 for i in library:
     curr_arr = []
     # genre insertion
-    # insert_genre(i)
+    insert_genre(i)
     for book in library[i]:
         curr_arr.append(book)
     curr_arr.sort(key=lambda x: x[2], reverse=True)
     for book in curr_arr:
-        # insert_author(book[1])
-        # insert_book(book[0], book[1], i, book[2])
+        insert_author(book[1])
+        insert_book(book[0], book[1], i, book[2])
         pass
         
     # print("\n")
