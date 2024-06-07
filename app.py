@@ -22,15 +22,30 @@ def get_books_by_genre():
         library[genre].append((title, bold))
     return library
 
+# def get_book_details(title):
+#     # print(title, '???')
+#     conn = sqlite3.connect('library.sqlite')
+#     cursor = conn.cursor()
+#     cursor.execute('''
+#         SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold
+#         FROM books
+#         JOIN authors ON books.author_id = authors.author_id
+#         JOIN genre ON books.genre_id = genre.genre_id
+#         WHERE books.title = ?
+#     ''', (title,))
+#     book_details = cursor.fetchone()
+#     conn.close()
+#     return book_details
+
 def get_book_details(title):
-    # print(title, '???')
     conn = sqlite3.connect('library.sqlite')
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold
+        SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold, info.page_count, info.description, info.thumbnail, info.preview_link
         FROM books
         JOIN authors ON books.author_id = authors.author_id
         JOIN genre ON books.genre_id = genre.genre_id
+        JOIN info ON books.book_id = info.book_id
         WHERE books.title = ?
     ''', (title,))
     book_details = cursor.fetchone()

@@ -9,9 +9,13 @@
 <body>
     <div class="container">
         <h1>{{ book[0] }}</h1>
+        <img src="{{ book[7] }}" alt="Thumbnail" />
         <p><strong>Author:</strong> {{ book[1] }} {{ book[2] }}</p>
         <p><strong>Genre:</strong> {{ book[3] }}</p>
-        <p><strong>Must Read:</strong> {{ 'Yes' if book[4] else 'No' }}</p>
+        <p><strong>Must read:</strong> {{ 'Yes' if book[4] else 'No' }}</p>
+        <p><strong>Page Count:</strong> {{ book[5] }}</p>
+        <p><strong>Description:</strong> {{ book[6] }}</p>
+        <p><a href="{{ book[8] }}" target="_blank">Preview Link</a></p>
         <a href="{{ url_for('index') }}">Back to Library</a>
     </div>
 </body>
