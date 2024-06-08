@@ -16,11 +16,9 @@
             flex: 1;
             margin-top: 20px;
         }
-
         .book-details p {
             margin: 30px 0;
         }
-
         .book-image {
             flex: 0 0 200px;
             margin-left: 20px;
@@ -32,7 +30,10 @@
         }
         .description {
             width: 100%;
-            /* margin-top: 20px; */
+            margin-top: 20px;
+        }
+        .links {
+            width: 100%;
         }
     </style>
 </head>
@@ -52,7 +53,16 @@
         <div class="description">
             <p><strong>Description:</strong> {{ book[6] }}</p>
         </div>
-        <a href="{{ url_for('index') }}">Back to Library</a>
+        <div class="links">
+            {% if book[9] %}
+                {% for link in book[9].split('||') %}
+                    <p><a href="{{ link }}" target="_blank">READ PDF Link {{ loop.index }}</a></p>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">Back to Library</a>
+        </div>
     </div>
 </body>
 </html>

@@ -22,35 +22,24 @@ def get_books_by_genre():
         library[genre].append((title, bold))
     return library
 
-# def get_book_details(title):
-#     # print(title, '???')
-#     conn = sqlite3.connect('library.sqlite')
-#     cursor = conn.cursor()
-#     cursor.execute('''
-#         SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold
-#         FROM books
-#         JOIN authors ON books.author_id = authors.author_id
-#         JOIN genre ON books.genre_id = genre.genre_id
-#         WHERE books.title = ?
-#     ''', (title,))
-#     book_details = cursor.fetchone()
-#     conn.close()
-#     return book_details
 
 def get_book_details(title):
     conn = sqlite3.connect('library.sqlite')
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold, info.page_count, info.description, info.thumbnail, info.preview_link
+        SELECT books.title, authors.a_first, authors.a_last, genre.genre, books.bold, info.page_count, info.description, info.thumbnail, info.preview_link, links.pdf_link
         FROM books
         JOIN authors ON books.author_id = authors.author_id
         JOIN genre ON books.genre_id = genre.genre_id
         JOIN info ON books.book_id = info.book_id
+        LEFT JOIN links ON books.book_id = links.book_id
         WHERE books.title = ?
     ''', (title,))
     book_details = cursor.fetchone()
+    print(book_details)
     conn.close()
     return book_details
+
 
 @app.route('/')
 def index():
@@ -68,18 +57,4 @@ def book_detail(title):
     return render_template('book_detail.html', book=book)
 
 if __name__ == '__main__':
-    # Print the template folder path
-    # print(f"Template folder: {app.template_folder}")
-    
-    # Print the contents of the templates folder
-    # template_folder_path = app.template_folder
-    # if template_folder_path and os.path.exists(template_folder_path):
-    #     # print("Contents of the templates folder:")
-    #     for root, dirs, files in os.walk(template_folder_path):
-    #         for name in files:
-    #             if not name.startswith('.'):
-    #                 print(os.path.join(root, name))
-    # else:
-    #     print("Templates folder not found.")
-    
     app.run(debug=True)
