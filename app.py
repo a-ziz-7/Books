@@ -57,4 +57,4 @@ def book_detail(title):
     return render_template('book_detail.html', book=book)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
