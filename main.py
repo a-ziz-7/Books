@@ -164,11 +164,6 @@ for i in library:
     # print("\n")
 
 
-#Emanuel part
-
-# insert_read("48 Laws of Power", "books/The 48 Laws of Power - Robert Greene.pdf")
-
-
 # Commit the changes and close the connection
 conn.commit()
 conn.close()

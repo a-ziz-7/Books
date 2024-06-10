@@ -36,7 +36,7 @@ def get_book_details(title):
         WHERE books.title = ?
     ''', (title,))
     book_details = cursor.fetchone()
-    print(book_details)
+    # print(book_details)
     conn.close()
     return book_details
 
